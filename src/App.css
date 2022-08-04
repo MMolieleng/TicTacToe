@@ -37,10 +37,19 @@
   }
 }
 
+.board {
+  width: 500px;
+  height: 500px;
+  display: grid;
+  margin: auto;
+  grid-template-columns: auto auto auto;
+  background: #cde;
+  padding: 10px;
+  border-radius: 2px;
+}
+
 .square {
   background: #61dafb;
-  width: 100px;
-  height: 100px;
   font-family: "Courier New", Courier, monospace;
   font-size: 32px;
   border: 0px;

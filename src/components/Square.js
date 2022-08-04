@@ -1,8 +1,8 @@
 import "./../App.css";
 
-const Square = ({ onclick, value }) => {
+const Square = ({ onclick, value, index }) => {
   return (
-    <button className="square" onClick={() => onclick(value)}>
+    <button className="square" onClick={() => onclick(index)}>
       {value}
     </button>
   );
