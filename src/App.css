@@ -52,5 +52,20 @@
   background: #61dafb;
   font-family: "Courier New", Courier, monospace;
   font-size: 32px;
+  border: 1px solid #fff;
+}
+
+.button {
+  padding: 8px;
+  background: #1c59d3;
+  font-size: 50px;
+  color: #cde;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: 0px;
+}
+
+.winnerDisplay {
+  color: purple;
+  font-size: 60px;
 }

@@ -4,12 +4,7 @@ import { useState } from "react";
 export default function Game() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState("X");
-
-  /**
-   [X][ ][ ]
-   [ ][X][ ]
-   [ ][ ][x]
-   */
+  const [gameOver, setGameOver] = useState(false);
 
   function calculateIsWinner() {
     const winningCombinations = [
@@ -23,7 +18,18 @@ export default function Game() {
       [2, 4, 6],
     ];
 
-    return false;
+    for (const combo of winningCombinations) {
+      const [a, b, c] = combo;
+
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        return squares[a];
+      }
+    }
+    return null;
   }
 
   function handleClick(selectedIndex) {
@@ -33,17 +39,34 @@ export default function Game() {
     squareCopy[selectedIndex] = currentPlayer;
     setSquares(squareCopy);
 
-    const haveAWinner = calculateIsWinner();
-
-    if (currentPlayer === "X") {
-      setCurrentPlayer("Y");
+    const gameWinner = calculateIsWinner();
+    if (gameWinner) {
+      setGameOver(true);
     } else {
-      setCurrentPlayer("X");
+      if (currentPlayer === "X") {
+        setCurrentPlayer("Y");
+      } else {
+        setCurrentPlayer("X");
+      }
     }
+  }
+
+  function startNewGame() {
+    setGameOver(false);
+    setSquares(Array(9).fill(null));
   }
   return (
     <div>
-      <h3>Current Player : {currentPlayer}</h3>
+      {!gameOver && <h3>Current Player : {currentPlayer}</h3>}
+      {gameOver && (
+        <div>
+          <h3 className="winnerDisplay">The winner is : {currentPlayer}</h3>
+          <button className="button" onClick={startNewGame}>
+            New Game
+          </button>
+        </div>
+      )}
+
       <Board squares={squares} onclick={handleClick} />
     </div>
   );
